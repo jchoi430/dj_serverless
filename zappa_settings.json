@@ -1,0 +1,14 @@
+{
+    "dev": {
+        "django_settings": "cdc_dist.settings",
+        "aws_region": "us-east-1",
+        "profile_name": "default",
+        "project_name": "dj-serverless",
+        "slim_handler": false,
+        "use_apigateway": true,
+        "runtime": "python3.7",
+        "s3_bucket": "zappa-project",
+	    "debug": true,
+        "log_level": "DEBUG",
+    }
+}
