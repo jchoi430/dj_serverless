@@ -12,7 +12,7 @@ Do followings to run the django app:
 setup virtual env: 
 > virtualenv -p python venv
 
-> source 
+> source venv/bin/activate
 
 > pip install -r requirements.txt
 
