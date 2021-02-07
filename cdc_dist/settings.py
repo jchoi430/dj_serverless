@@ -15,6 +15,26 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
+def get_db_info():
+    if os.getenv('ENV') == 'dev':
+        return {
+            'NAME': os.getenv('DB_NAME'),               
+            'USER': os.getenv('DB_USER'),
+            'PASSWORD': os.getenv('DB_PASS'),
+            'HOST': os.getenv('DB_HOST'),
+            'PORT': os.getenv('DB_PORT'),
+        }
+    else:
+        return {
+            'NAME': os.getenv('DB_DEV_NAME'),               
+            'USER': os.getenv('DB_DEV_USER'),
+            'PASSWORD': os.getenv('DB_DEV_PASS'),
+            'HOST': os.getenv('DB_DEV_HOST'),
+            'PORT': os.getenv('DB_DEV_PORT'),
+        }
+
+db_info = get_db_info()
+
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -23,12 +43,13 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/2.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '+de$t6pj*^$e0u+&91xau%(q6jgs49zbrqhs=sodhk4$tnrwra'
+SECRET_KEY = os.getenv('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = True if os.getenv('ENV') == 'dev' else False
 
 ALLOWED_HOSTS = [
+    'localhost',
     '127.0.0.1',
     '0r7srzg18b.execute-api.us-east-1.amazonaws.com',
 ]
@@ -78,15 +99,14 @@ WSGI_APPLICATION = 'cdc_dist.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
-
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': os.getenv('DB_NAME'),               
-        'USER': os.getenv('DB_USER'),
-        'PASSWORD': os.getenv('DB_PASS'),
-        'HOST': os.getenv('DB_HOST'),
-        'PORT': os.getenv('DB_PORT'),
+        'NAME': db_info['NAME'],               
+        'USER': db_info['USER'],
+        'PASSWORD': db_info['PASSWORD'],
+        'HOST': db_info['HOST'],
+        'PORT': db_info['PORT'],
     }
 }
 
@@ -128,3 +148,5 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
 STATIC_URL = '/static/'
+
+
