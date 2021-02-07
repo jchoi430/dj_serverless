@@ -7,8 +7,20 @@
         "slim_handler": false,
         "use_apigateway": true,
         "runtime": "python3.7",
-        "s3_bucket": "zappa-project",
+        "s3_bucket": "zappa-project-dev",
 	    "debug": true,
+        "log_level": "DEBUG",
+    },
+    "dev": {
+        "django_settings": "cdc_dist.settings",
+        "aws_region": "us-east-1",
+        "profile_name": "default",
+        "project_name": "dj-serverless",
+        "slim_handler": false,
+        "use_apigateway": true,
+        "runtime": "python3.7",
+        "s3_bucket": "zappa-project-prod",
+        "debug": true,
         "log_level": "DEBUG",
     }
 }
