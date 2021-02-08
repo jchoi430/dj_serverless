@@ -64,6 +64,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    # The new apps
+    'display_cdc_vaccine_dist_report',
 ]
 
 MIDDLEWARE = [
